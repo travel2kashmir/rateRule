@@ -1,0 +1,164 @@
+{
+    "userRateCondition": [{
+            "userRateConditionId": "URC001",
+            "userRateConditionOP": "any",
+            "description": "if any of the condition ,atches the will be displayed",
+            "maxUserPercentage": 15,
+            "userSignedIn": false,
+            "isDomestic": true
+        }, {
+            "userRateConditionId": "URC002",
+            "userRateConditionOP": "all",
+            "description": "shows rate only if all conditions match",
+            "maxUserPercentage": 10
+        }, {
+            "userRateConditionId": "URC003",
+            "userRateConditionOP": "none",
+            "description": "doesn't show rate to the people matching this group",
+
+        }
+    ]
+}{
+    "rateConditioningUserDevicesLink": [{
+            "userRateConditionId": "URC001",
+            "userDeviceType": "mobile"
+        }, {
+            "userRateConditionId": "URC001",
+            "userDeviceType": "tablet"
+        }, {
+            "userRateConditionId": "URC002",
+            "userDeviceType": "desktop"
+        }, {
+            "userRateConditionId": "URC003",
+            "userDeviceType": "desktop"
+        }
+    ]
+}{
+    "rateConditioningUserCountryLink": [{
+            "userRateConditionId": "URC001",
+            "userCountry": "us"
+        }, {
+            "userRateConditionId": "URC001",
+            "userCountry": "uk"
+        }, {
+            "userRateConditionId": "URC002",
+            "userCountry": "in"
+        }, {
+            "userRateConditionId": "URC003",
+            "userCountry": "in"
+        }, {
+            "userRateConditionId": "URC003",
+            "userCountry": "fr"
+        }
+    ]
+}{
+    "userConditioningLanguageLink":
+    [{
+            "userRateConditionId": "URC001",
+            "LanguageCode": "en"
+        }, {
+            "userRateConditionId": "URC002",
+            "LanguageCode": "fr"
+        }, {
+            "userRateConditionId": "URC003",
+            "LanguageCode": "ar"
+        }, {
+            "userRateConditionId": "URC003",
+            "LanguageCode": "fr"
+        }
+    ]
+}{
+    "userRateConditioningMembershipLink":
+    [{
+            "userRateConditionId": "URC001",
+            "alwaysEligibleMembership": "Golden"
+        }, {
+            "userRateConditionId": "URC002",
+            "alwaysEligibleMembership": "Golden"
+        }, {
+            "userRateConditionId": "URC003",
+            "alwaysEligibleMembership": "Golden"
+        }, {
+            "userRateConditionId": "URC001",
+            "alwaysEligibleMembership": "Silver"
+        }, {
+            "userRateConditionId": "URC002",
+            "alwaysEligibleMembership": "Platinum"
+        }
+    ]
+}{
+    "userRateConditionRefrenceLink":
+    [{
+            "refrenceingRateCondition": "URC001",
+            "refrencedRateCondition": "URC002"
+        }, {
+            "refrenceingRateCondition": "URC001",
+            "refrencedRateCondition": "URC003"
+        }
+    ]
+}{
+    "rateModification": [{
+            "RateModificationId": "RM001",
+            "hotelAmenity": "Free_wifi",
+            "priceMultiplier": "0.87"
+        }, {
+            "RateModificationId": "RM002",
+            "priceMultiplier": "0.98"
+        }, {
+            "RateModificationId": "RM003",
+            "hotelAmenity": "Free_wifi",
+            "priceMultiplier": "0.99"
+        }
+    ]
+}
+{
+    "rateinEligiblity": [{
+            "rateInEligiblity": "IE001",
+            "ineligiblityType": "EXACT",
+            "inEligiblityReason": "PROGRAM_MEMBER"
+        }, {
+            "rateInEligiblity": "IE002",
+            "ineligiblityType": "PRICE_BAND",
+            "inEligiblityReason": "PROGRAM_MEMBER"
+        }, {
+            "rateInEligiblity": "IE003",
+            "ineligiblityType": "EXISTANCE",
+            "inEligiblityReason": "PROGRAM_MEMBER"
+        }
+
+    ]
+}
+{
+    "rateRule": [{
+            "rateRuleId": "RR001",
+            "rateInEligiblityId": "IE001",
+            "rateModificationId": "RM001"
+        }, {
+            "rateRuleId": "RR002",
+            "rateInEligiblityId": "IE002",
+            "rateModificationId": "RM002"
+        },
+        {
+            "rateRuleId": "RR003",
+            "rateInEligiblityId": "IE003",
+            "rateModificationId": "RM003"
+        }
+    ]
+}
+{
+    "rateRuleConditioningLink": [{
+            "rateRuleId": "RR001",
+            "userRateConditionId": "URC001"
+        }, {
+            "rateRuleId": "RR001",
+            "userRateConditionId": "URC003"
+        }, {
+            "rateRuleId": "RR002",
+            "userRateConditionId": "URC002"
+        }, {
+            "rateRuleId": "RR003",
+            "userRateConditionId": "URC002"
+        }
+
+    ]
+}

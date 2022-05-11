@@ -1,0 +1,132 @@
+==============================================================================================================
+create querry for Table "user_rate__condition"
+===============================================================================================================
+CREATE SEQUENCE public.rate_condition;
+CREATE TABLE public.user_rate_condition(
+        user_rate_condition_id text PRIMARY KEY CHECK (user_rate_condition_id ~ '^urc00[0-9]+$' ) DEFAULT 'urc00'  || nextval('public.rate_condition'),
+		user_rate_condition_op varchar(5),
+		description varchar(1000),
+		max_user_percentage varchar(4),
+		user_signed_in boolean,
+		is_domestic boolean
+	);
+============================================================================================================
+create query for table "rate_condition_user_device_link"
+============================================================================================================	
+
+create table public.rate_condition_user_device_link(
+user_rate_condition_id varchar(10),
+user_device_type varchar(10),
+CONSTRAINT fk_urc_ud FOREIGN KEY (user_rate_condition_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade
+);
+============================================================================================================
+create table for "rate_condition_user_country_link"
+============================================================================================================	
+create table public.rate_condition_user_country_link(
+user_rate_condition_id varchar(10),
+user_country varchar(10),
+CONSTRAINT fk_urc_uc FOREIGN KEY (user_rate_condition_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade
+);
+============================================================================================================
+create table for "rate_condition_language_link"
+============================================================================================================	
+create table public.rate_condition_language_link(
+user_rate_condition_id varchar(10),
+language varchar(5),
+CONSTRAINT fk_urc_ul FOREIGN KEY (user_rate_condition_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade
+);
+
+============================================================================================================
+create table for "rate_condition_membership_link"
+============================================================================================================	
+create table public.rate_condition_membership_link(
+user_rate_condition_id varchar(10),
+always_eligible_membership_id varchar(20),
+CONSTRAINT fk_pmm_aem FOREIGN KEY (always_eligible_membership_id)
+  REFERENCES public.package_membership_master(program_id)
+  on delete cascade
+  on update cascade,
+  CONSTRAINT fk_urc_ul FOREIGN KEY (user_rate_condition_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade
+);
+============================================================================================================
+create table for "rate_condition_refrence_link"
+============================================================================================================	
+create table public.rate_condition_refrence_link(
+refrencing_id varchar(10),
+refrenced_id varchar(10),
+  CONSTRAINT fk_urc_urcp FOREIGN KEY (refrencing_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade,
+  CONSTRAINT fk_urc_urcc FOREIGN KEY (refrenced_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade
+);
+============================================================================================================
+create table for "rate_ineligiblity"
+============================================================================================================	
+CREATE SEQUENCE public.ineligiblity;
+CREATE TABLE public.user_rate__ineligiblity(
+        user_rate_ineligiblity_id text PRIMARY KEY CHECK (user_rate_ineligiblity_id ~ '^ie00[0-9]+$' ) DEFAULT 'ie00'  || nextval('public.ineligiblity'),
+		ineligiblity_type varchar(12),
+		ineligiblity_reason varchar(20)
+	);
+
+============================================================================================================
+create table for "rate_modification"
+============================================================================================================	
+CREATE SEQUENCE public.modification;
+CREATE TABLE public.rate_modification(
+        rate_modification_id text PRIMARY KEY CHECK (rate_modification_id ~ '^rm00[0-9]+$' ) DEFAULT 'rm00'  || nextval('public.modification'),
+		hotel_amenity varchar(20),
+		price_multiplier float
+	);
+	
+============================================================================================================
+create table for "rate_rule"
+============================================================================================================	
+CREATE SEQUENCE public.rule;
+create table public.rate_rule(
+rate_rule_id text PRIMARY KEY CHECK (rate_rule_id ~ '^rr00[0-9]+$' ) DEFAULT 'rr00'  || nextval('public.rule'),
+rate_ineligiblity_id varchar(20),
+rate__modification_id varchar(20),
+  CONSTRAINT fk_rr_rei FOREIGN KEY (rate_ineligiblity_id)
+  REFERENCES public.user_rate__ineligiblity(user_rate_ineligiblity_id)
+  on delete cascade
+  on update cascade,
+  CONSTRAINT fk_rr_rmi FOREIGN KEY (rate__modification_id)
+  REFERENCES public.rate_modification(rate_modification_id)
+  on delete cascade
+  on update cascade
+);	
+
+============================================================================================================
+create table for "rate_rule_condition_link"
+============================================================================================================	
+CREATE SEQUENCE public.rule_for_rates;
+create table public.rate_rule_condition_link(
+rate_rule_id varchar(20),
+user_rate_condition_id varchar(20),
+  CONSTRAINT fk_rr_rei FOREIGN KEY (rate_rule_id)
+  REFERENCES public.rate_rule(rate_rule_id)
+  on delete cascade
+  on update cascade,
+  CONSTRAINT fk_rr_rmi FOREIGN KEY (user_rate_condition_id)
+  REFERENCES public.user_rate_condition(user_rate_condition_id)
+  on delete cascade
+  on update cascade
+);	
+============================================================================================================
