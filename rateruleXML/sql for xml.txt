@@ -1,0 +1,42 @@
+============================================================================================================
+General query
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.rate_rule.rate_ineligiblity_id,
+public.rate_rule.rate_modification_id,
+public.rate_rule_condition_link.user_rate_condition_id
+from public.rate_rule
+inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
+inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
+where public.rate_rule.rate_rule_id='rr001';
+
+==================================================================================================
+user_devices for rate rule id 
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.user_rate_condition.user_rate_condition_id,
+public.rate_condition_user_device_link.user_device_type
+from public.rate_rule
+inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
+inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
+inner join public.rate_condition_user_device_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_user_device_link.user_rate_condition_id
+where public.rate_rule.rate_rule_id='rr001';
+
+==================================================================================================
+user_coountry for rate rule id 
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.user_rate_condition.user_rate_condition_id,
+public.rate_condition_user_country_link.user_country
+from public.rate_rule
+inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
+inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
+inner join public.rate_condition_user_country_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_user_country_link.user_rate_condition_id
+where public.rate_rule.rate_rule_id='rr001';
+
+
+
+
+
+
+
