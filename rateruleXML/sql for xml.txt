@@ -23,7 +23,7 @@ inner join public.rate_condition_user_device_link on public.user_rate_condition.
 where public.rate_rule.rate_rule_id='rr001';
 
 ==================================================================================================
-user_coountry for rate rule id 
+user_country for rate rule id 
 ============================================================================================================
 select public.rate_rule.rate_rule_id,
 public.user_rate_condition.user_rate_condition_id,
@@ -33,10 +33,77 @@ inner join public.rate_rule_condition_link on public.rate_rule_condition_link.ra
 inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
 inner join public.rate_condition_user_country_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_user_country_link.user_rate_condition_id
 where public.rate_rule.rate_rule_id='rr001';
+==================================================================================================
+language for rate rule id 
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.user_rate_condition.user_rate_condition_id,
+public.rate_condition_language_link.language
+from public.rate_rule
+inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
+inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
+inner join public.rate_condition_language_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_language_link.user_rate_condition_id
+where public.rate_rule.rate_rule_id='rr001';
+==================================================================================================
+rate condition membership for rate rule id 
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.user_rate_condition.user_rate_condition_id,
+public.rate_condition_membership_link.always_eligible_membership_id,
+public.package_membership_master.program_name
+from public.rate_rule
+inner join public.rate_rule_condition_link
+on public.rate_rule.rate_rule_id=public.rate_rule_condition_link.rate_rule_id
+inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
+inner join public.rate_condition_membership_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_membership_link.user_rate_condition_id
+inner join public.package_membership_master on public.package_membership_master.program_id=
+public.rate_condition_membership_link.always_eligible_membership_id
+where public.rate_rule.rate_rule_id='rr001';
 
+==================================================================================================
+rate rule refrence for rate rule id 
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.rate_condition_refrence_link.refrencing_id,
+public.rate_condition_refrence_link.refrenced_id
+from public.rate_rule
+inner join public.rate_rule_condition_link
+on public.rate_rule.rate_rule_id=public.rate_rule_condition_link.rate_rule_id
+inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
+inner join public.rate_condition_refrence_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_refrence_link.refrencing_id
+where public.rate_rule.rate_rule_id='rr001';
+==================================================================================================
+user rate ineligiblity
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.user_rate_ineligiblity.user_rate_ineligiblity_id,
+public.user_rate_ineligiblity.ineligiblity_type,
+public.user_rate_ineligiblity.ineligiblity_reason
+from public.rate_rule
+inner join public.user_rate_ineligiblity
+on public.rate_rule.rate_ineligiblity_id=public.user_rate_ineligiblity.user_rate_ineligiblity_id
+where public.rate_rule.rate_rule_id='rr001';
 
+==================================================================================================
+rate modification
+============================================================================================================
+select public.rate_rule.rate_rule_id,
+public.rate_modification.rate_modification_id,
+public.rate_modification.hotel_amenity,
+public.rate_modification.price_multiplier
+from public.rate_rule
+inner join public.rate_modification
+on public.rate_rule.rate_modification_id=public.rate_modification.rate_modification_id
+where public.rate_rule.rate_rule_id='rr001';
 
-
-
+==================================================================================================
+============================================================================================================
+==================================================================================================
+============================================================================================================
+==================================================================================================
+============================================================================================================
+URI for request:
+fetching xml of rateRule::
+ /raterule/raterule_id/xml
 
 
