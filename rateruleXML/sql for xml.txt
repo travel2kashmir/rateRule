@@ -20,7 +20,7 @@ from public.rate_rule
 inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
 inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
 inner join public.rate_condition_user_device_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_user_device_link.user_rate_condition_id
-where public.rate_rule.rate_rule_id='rr001';
+where public.rate_rule.rate_rule_id='rr001' and public.user_rate_condition.user_rate_condition_id='urc001';
 
 ==================================================================================================
 user_country for rate rule id 
@@ -32,7 +32,7 @@ from public.rate_rule
 inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
 inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
 inner join public.rate_condition_user_country_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_user_country_link.user_rate_condition_id
-where public.rate_rule.rate_rule_id='rr001';
+where public.rate_rule.rate_rule_id='rr001'and public.user_rate_condition.user_rate_condition_id='urc001';
 ==================================================================================================
 language for rate rule id 
 ============================================================================================================
@@ -43,7 +43,7 @@ from public.rate_rule
 inner join public.rate_rule_condition_link on public.rate_rule_condition_link.rate_rule_id=public.rate_rule.rate_rule_id
 inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
 inner join public.rate_condition_language_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_language_link.user_rate_condition_id
-where public.rate_rule.rate_rule_id='rr001';
+where public.rate_rule.rate_rule_id='rr001'and public.user_rate_condition.user_rate_condition_id='urc001';
 ==================================================================================================
 rate condition membership for rate rule id 
 ============================================================================================================
@@ -71,7 +71,7 @@ inner join public.rate_rule_condition_link
 on public.rate_rule.rate_rule_id=public.rate_rule_condition_link.rate_rule_id
 inner join public.user_rate_condition on public.user_rate_condition.user_rate_condition_id=public.rate_rule_condition_link.user_rate_condition_id
 inner join public.rate_condition_refrence_link on public.user_rate_condition.user_rate_condition_id=public.rate_condition_refrence_link.refrencing_id
-where public.rate_rule.rate_rule_id='rr001';
+where public.rate_rule.rate_rule_id='rr001'and public.user_rate_condition.user_rate_condition_id='urc001';
 ==================================================================================================
 user rate ineligiblity
 ============================================================================================================
@@ -107,3 +107,8 @@ fetching xml of rateRule::
  /raterule/raterule_id/xml
 
 
+${user_rate_condition_id:equals('null'):not():and(${user_rate_condition_op:equals('null'):not()})}
+
+${filename:toLower():equals( ${filename} ):and(
+	${filename:length():ge(5)}
+)}
